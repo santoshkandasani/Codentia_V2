@@ -1,0 +1,157 @@
+/* Codentia Content Script Styles */
+/* Visual feedback for AI rule violations */
+
+.codentia-violation {
+  background: rgba(255, 107, 107, 0.12) !important;
+  color: #D64545 !important;
+  text-decoration: line-through !important;
+  padding: 1px 3px !important;
+  border-radius: 3px !important;
+  position: relative !important;
+  cursor: help !important;
+  transition: background 0.2s !important;
+}
+
+.codentia-violation:hover {
+  background: rgba(255, 107, 107, 0.2) !important;
+}
+
+.codentia-violation::after {
+  content: '⚠' !important;
+  display: inline-block !important;
+  margin-left: 2px !important;
+  font-size: 10px !important;
+  color: #D64545 !important;
+  text-decoration: none !important;
+  vertical-align: super !important;
+}
+
+/* Moss semantic detection — purple tint to indicate meaning-based catch */
+.codentia-violation.codentia-semantic {
+  background: rgba(147, 51, 234, 0.12) !important;
+  color: #7C3AED !important;
+  text-decoration-color: #7C3AED !important;
+}
+.codentia-violation.codentia-semantic::after {
+  content: '🧠' !important;
+  color: #7C3AED !important;
+}
+
+.codentia-marker {
+  display: inline-block !important;
+  margin-left: 4px !important;
+  color: #D64545 !important;
+  font-size: 12px !important;
+  cursor: help !important;
+  animation: codentia-pulse 2s infinite !important;
+}
+
+.codentia-badge {
+  display: block !important;
+  margin-top: 8px !important;
+  padding: 0 !important;
+  clear: both !important;
+}
+
+.codentia-badge-inner {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 4px 10px !important;
+  background: rgba(0, 204, 109, 0.08) !important;
+  border: 1px solid rgba(0, 204, 109, 0.2) !important;
+  border-radius: 100px !important;
+  font-size: 11px !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  color: #2E7D32 !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+}
+
+.codentia-badge.low-score .codentia-badge-inner {
+  background: rgba(255, 107, 107, 0.08) !important;
+  border-color: rgba(255, 107, 107, 0.2) !important;
+  color: #D64545 !important;
+}
+
+.codentia-badge-icon {
+  font-size: 12px !important;
+}
+
+.codentia-badge-detail {
+  font-weight: 400 !important;
+  opacity: 0.8 !important;
+  font-size: 10px !important;
+}
+
+/* Floating Codentia status indicator */
+.codentia-status {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  z-index: 999999 !important;
+  padding: 8px 14px !important;
+  background: rgba(0, 204, 109, 0.95) !important;
+  color: #000 !important;
+  border-radius: 100px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif !important;
+  box-shadow: 0 4px 16px rgba(0, 204, 109, 0.3) !important;
+  cursor: pointer !important;
+  transition: all 0.3s !important;
+  user-select: none !important;
+}
+
+.codentia-status:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(0, 204, 109, 0.4) !important;
+}
+
+.codentia-status.disabled {
+  background: rgba(150, 150, 150, 0.9) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
+}
+
+@keyframes codentia-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes codentia-slidein {
+  from {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Codentia V2 policy gateway */
+.codentia-policy-toast {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 2147483647;
+  width: min(360px, calc(100vw - 44px));
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: #0f172a;
+  color: #fff;
+  box-shadow: 0 12px 36px rgba(0,0,0,.25);
+  font: 13px/1.45 Inter, system-ui, sans-serif;
+}
+.codentia-policy-toast strong { display:block; margin-bottom:5px; }
+.codentia-policy-toast span { display:block; opacity:.82; }
+.codentia-output-protection {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+  font: 12px/1.4 Inter, system-ui, sans-serif;
+}
+.codentia-output-protection strong { display:block; }

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Codentia — Policy Gateway Demo</title>
+<style>
+body{font-family:Inter,system-ui,sans-serif;background:#f8fafc;color:#0f172a;margin:0;padding:32px}.wrap{max-width:920px;margin:auto}.card{background:white;border:1px solid #e2e8f0;border-radius:18px;padding:22px;margin-top:18px;box-shadow:0 8px 30px rgba(15,23,42,.06)}h1{margin:0 0 8px}.sub{color:#64748b}.flow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:22px 0}.pill{padding:9px 13px;border-radius:999px;background:#eef2ff;font-size:13px;font-weight:700}.arrow{color:#94a3b8}textarea{width:100%;min-height:130px;box-sizing:border-box;border:1px solid #cbd5e1;border-radius:12px;padding:14px;font:14px/1.5 inherit}button{margin-top:10px;border:0;border-radius:10px;padding:11px 16px;background:#0f172a;color:#fff;font-weight:700;cursor:pointer}.status{margin-top:14px;padding:12px;border-radius:10px;background:#f1f5f9;font-size:13px}.demo-ai-response{margin-top:16px;padding:16px;border:1px solid #e2e8f0;border-radius:12px;background:#fff;min-height:50px}.note{font-size:12px;color:#64748b;margin-top:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Codentia Policy Gateway</h1>
+  <div class="sub">A local demo of the real flow: protect the prompt → simulate AI → inspect the response.</div>
+  <div class="flow"><span class="pill">User</span><span class="arrow">→</span><span class="pill">Pre-check</span><span class="arrow">→</span><span class="pill">AI</span><span class="arrow">→</span><span class="pill">Post-check</span><span class="arrow">→</span><span class="pill">User</span></div>
+  <div class="card">
+    <h3>Try a prompt containing customer information</h3>
+    <textarea id="prompt">Summarize this customer complaint.
+Customer: Rahul Kumar
+Email: rahul@gmail.com
+Phone: 9876543210
+The order arrived damaged and the customer wants a replacement.</textarea>
+    <button id="send">Send to AI</button>
+    <div id="status" class="status">Codentia is watching this page.</div>
+    <div id="response" class="demo-ai-response" data-ai-response="true"></div>
+    <div class="note">Try an API key such as <code>api_key=sk-12345678901234567890</code> to demonstrate a blocked prompt.</div>
+  </div>
+</div>
+<script>
+const prompt=document.getElementById('prompt'), send=document.getElementById('send'), status=document.getElementById('status'), response=document.getElementById('response');
+send.addEventListener('click',()=>{
+  const value=prompt.value;
+  if(!value.trim()) return;
+  // In a real AI site, the platform would now receive the prompt.
+  // Codentia's content script masks/blocks before this handler runs.
+  status.textContent='AI received the protected prompt and generated a response.';
+  response.textContent='The customer reports that the order arrived damaged and is requesting a replacement. Contact: Rahul Kumar, rahul@gmail.com, 9876543210.';
+});
+</script>
+</body>
+</html>
